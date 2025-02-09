@@ -3,20 +3,19 @@ interface Performances {
    audience: number;
 }
 
-interface Plays {
+interface Play {
    name: string;
    type: "tragedy" | "comedy";
 }
 
-export interface Statement {
-   invoice: {
-      customer: string;
-      performances: Performances[];
-   };
-   plays: { [key: string]: Plays };
+interface Invoice {
+   customer: string;
+   performances: Performances[];
 }
 
-function amountFor(perf: Performances, play: Plays) {
+export type Plays = { [key: string]: Play };
+
+function amountFor(perf: Performances, play: Play) {
    let thisAmount = 0;
 
    switch (play.type) {
@@ -41,7 +40,7 @@ function amountFor(perf: Performances, play: Plays) {
    return thisAmount;
 }
 
-export default function statement({ invoice, plays }: Statement) {
+export default function statement(invoice: Invoice, plays: Plays) {
    let totalAmount = 0;
    let volumeCredits = 0;
    let result = `Statement for ${invoice.customer}\n`;
