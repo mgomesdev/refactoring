@@ -1,14 +1,18 @@
 import invoice from "../../src/cap-1-refatoracao-primeiro-exemplo/invoices.json";
 import plays from "../../src/cap-1-refatoracao-primeiro-exemplo/plays.json";
-import statement from "../../src/cap-1-refatoracao-primeiro-exemplo/statement";
-
-// const invoice = require("../../src/cap-1-refatoracao-primeiro-exemplo/invoices.json");
-// const plays = require("../../src/cap-1-refatoracao-primeiro-exemplo/plays.json");
+import statement, { Statement } from "../../src/cap-1-refatoracao-primeiro-exemplo/statement";
 
 describe("Cap. 1 - Refatoração - Primeiro Exemplo", () => {
    describe("Ponto de partida", () => {
       it("Deve resultar na saida correta de Statement for BigCo", () => {
-         const result = statement({ invoice, plays });
+         const result = statement({
+            invoice: invoice[0],
+            plays,
+         } as unknown as Statement);
+
+         expect(result).toBe(
+            `Statement for BigCo\n Hamlet: $650.00 (55 seats)\n As You Like It: $490.00 (35 seats)\n Othello: $500.00 (40 seats)\nAmount owed is $1,640.00\nYou earned 47 credits\n`
+         );
       });
    });
 
