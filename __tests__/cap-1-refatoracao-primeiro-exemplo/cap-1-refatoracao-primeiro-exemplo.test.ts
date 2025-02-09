@@ -16,10 +16,6 @@ describe("Cap. 1 - Refatoração - Primeiro Exemplo", () => {
       });
    });
 
-   it.todo("Comentários sobre o programa inicial");
-
-   it.todo("Primeiro passo na refatoração");
-
    it.todo("Decompondo a função statement");
 
    it.todo("Removendo a variável play");
