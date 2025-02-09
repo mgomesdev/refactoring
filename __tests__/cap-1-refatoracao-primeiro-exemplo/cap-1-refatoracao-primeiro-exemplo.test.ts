@@ -1,6 +1,6 @@
 import invoice from "../../src/cap-1-refatoracao-primeiro-exemplo/invoices.json";
 import plays from "../../src/cap-1-refatoracao-primeiro-exemplo/plays.json";
-import statement, { Statement } from "../../src/cap-1-refatoracao-primeiro-exemplo/statement";
+import statement, { Statement } from "../../src/cap-1-refatoracao-primeiro-exemplo/statement-refact";
 
 describe("Cap. 1 - Refatoração - Primeiro Exemplo", () => {
    describe("Ponto de partida", () => {
