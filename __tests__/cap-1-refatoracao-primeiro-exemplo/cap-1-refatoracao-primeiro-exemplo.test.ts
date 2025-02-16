@@ -13,13 +13,7 @@ describe("Cap. 1 - Refatoração - Primeiro Exemplo", () => {
       });
    });
 
-   it.todo("Decompondo a função statement");
-
-   it.todo("Removendo a variável play");
-
-   it.todo("Extraindo créditos por volume");
-
-   it.todo("Removendo a variável format");
+   it.todo("Removendo o total de créditos por volume");
 
    it.todo("Status: muitas funções aninhadas");
 
