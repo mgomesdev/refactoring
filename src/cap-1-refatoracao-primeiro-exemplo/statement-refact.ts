@@ -1,4 +1,4 @@
-interface Performances {
+interface Performance {
    playID: string;
    audience: number;
 }
@@ -10,7 +10,7 @@ interface Play {
 
 interface Invoice {
    customer: string;
-   performances: Performances[];
+   performances: Performance[];
 }
 
 export type Plays = { [key: string]: Play };
@@ -26,11 +26,11 @@ export default function statement(invoice: Invoice, plays: Plays) {
       );
    }
 
-   function playFor(performance: Performances) {
+   function playFor(performance: Performance) {
       return plays[performance.playID];
    }
 
-   function amountFor(performance: Performances) {
+   function amountFor(performance: Performance) {
       let result = 0;
 
       switch (playFor(performance).type) {
@@ -55,7 +55,7 @@ export default function statement(invoice: Invoice, plays: Plays) {
       return result;
    }
 
-   function volumeCreditsFor(perf: Performances) {
+   function volumeCreditsFor(perf: Performance) {
       let result = 0;
       result += Math.max(perf.audience - 30, 0);
 
