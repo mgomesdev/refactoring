@@ -26,7 +26,7 @@ export default function statement(invoice: Invoice, plays: Plays) {
       return plays[performance.playID];
    }
 
-   function amountFor(performance: Performances, play: Play) {
+   function amountFor(performance: Performances) {
       let result = 0;
 
       switch (playFor(performance).type) {
@@ -52,8 +52,6 @@ export default function statement(invoice: Invoice, plays: Plays) {
    }
 
    for (let perf of invoice.performances) {
-      let thisAmount = amountFor(perf, playFor(perf));
-
       // soma créditos por volume
       volumeCredits += Math.max(perf.audience - 30, 0);
 
@@ -61,8 +59,8 @@ export default function statement(invoice: Invoice, plays: Plays) {
       if ("comedy" === playFor(perf).type) volumeCredits += Math.floor(perf.audience / 5);
 
       // exibe a linha para esta requisição
-      result += ` ${playFor(perf).name}: ${format(thisAmount / 100)} (${perf.audience} seats)\n`;
-      totalAmount += thisAmount;
+      result += ` ${playFor(perf).name}: ${format(amountFor(perf) / 100)} (${perf.audience} seats)\n`;
+      totalAmount += amountFor(perf);
    }
 
    result += `Amount owed is ${format(totalAmount / 100)}\n`;
