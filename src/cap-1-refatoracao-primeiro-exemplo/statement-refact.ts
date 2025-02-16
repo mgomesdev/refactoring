@@ -15,31 +15,6 @@ interface Invoice {
 
 export type Plays = { [key: string]: Play };
 
-function amountFor(performance: Performances, play: Play) {
-   let result = 0;
-
-   switch (play.type) {
-      case "tragedy":
-         result = 40000;
-         if (performance.audience > 30) {
-            result += 1000 * (performance.audience - 30);
-         }
-         break;
-      case "comedy":
-         result = 30000;
-         if (performance.audience > 20) {
-            result += 1000 + 500 * (performance.audience - 20);
-         }
-         result += 300 * performance.audience;
-         break;
-
-      default:
-         throw new Error(`unknown type: ${play.type}`);
-   }
-
-   return result;
-}
-
 export default function statement(invoice: Invoice, plays: Plays) {
    let totalAmount = 0;
    let volumeCredits = 0;
@@ -49,6 +24,31 @@ export default function statement(invoice: Invoice, plays: Plays) {
 
    function playFor(performance: Performances) {
       return plays[performance.playID];
+   }
+
+   function amountFor(performance: Performances, play: Play) {
+      let result = 0;
+
+      switch (playFor(performance).type) {
+         case "tragedy":
+            result = 40000;
+            if (performance.audience > 30) {
+               result += 1000 * (performance.audience - 30);
+            }
+            break;
+         case "comedy":
+            result = 30000;
+            if (performance.audience > 20) {
+               result += 1000 + 500 * (performance.audience - 20);
+            }
+            result += 300 * performance.audience;
+            break;
+
+         default:
+            throw new Error(`unknown type: ${playFor(performance).type}`);
+      }
+
+      return result;
    }
 
    for (let perf of invoice.performances) {
