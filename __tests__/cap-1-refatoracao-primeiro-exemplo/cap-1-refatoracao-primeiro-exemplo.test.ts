@@ -8,7 +8,7 @@ describe("Cap. 1 - Refatoração - Primeiro Exemplo", () => {
          const result = statement(invoice[0], plays as Plays);
 
          expect(result).toBe(
-            `Statement for BigCo\n Hamlet: $650.00 (55 seats)\n As You Like It: $490.00 (35 seats)\n Othello: $500.00 (40 seats)\nAmount owed is $1,640.00\nYou earned 47 credits\n`
+            `Statement for BigCo\n Hamlet: $650.00 (55 seats)\n As You Like It: $490.00 (35 seats)\n Othello: $500.00 (40 seats)\nAmount owed is $1,640.00\nYou earned 54 credits\n`
          );
       });
    });

@@ -51,9 +51,17 @@ export default function statement(invoice: Invoice, plays: Plays) {
       return result;
    }
 
-   for (let perf of invoice.performances) {
-      // soma créditos por volume
+   function volumeCreditsFor(perf: Performances) {
+      let volumeCredits = 0;
       volumeCredits += Math.max(perf.audience - 30, 0);
+
+      if ("comedy" === playFor(perf).type) volumeCredits += Math.floor(perf.audience / 5);
+
+      return volumeCredits;
+   }
+
+   for (let perf of invoice.performances) {
+      volumeCredits += volumeCreditsFor(perf);
 
       // soma um crédito extra para cada dez espectadores de comédia
       if ("comedy" === playFor(perf).type) volumeCredits += Math.floor(perf.audience / 5);
