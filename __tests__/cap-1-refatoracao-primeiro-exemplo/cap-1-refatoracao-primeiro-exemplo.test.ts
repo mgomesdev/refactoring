@@ -13,10 +13,6 @@ describe("Cap. 1 - Refatoração - Primeiro Exemplo", () => {
       });
    });
 
-   it.todo("Removendo o total de créditos por volume");
-
-   it.todo("Status: muitas funções aninhadas");
-
    it.todo("Separando as fases de calculo e de formatação");
 
    it.todo("Status: separando em dois arquivos (e fases)");

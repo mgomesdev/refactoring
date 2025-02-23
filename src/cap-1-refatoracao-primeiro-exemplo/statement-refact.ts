@@ -16,6 +16,10 @@ interface Invoice {
 export type Plays = { [key: string]: Play };
 
 export default function statement(invoice: Invoice, plays: Plays) {
+   return renderPlainText(invoice, plays);
+}
+
+function renderPlainText(invoice: Invoice, plays: Plays) {
    let result = `Statement for ${invoice.customer}\n`;
 
    for (let perf of invoice.performances) {
