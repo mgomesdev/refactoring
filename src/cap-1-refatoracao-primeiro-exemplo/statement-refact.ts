@@ -17,7 +17,6 @@ export type Plays = { [key: string]: Play };
 
 export default function statement(invoice: Invoice, plays: Plays) {
    let totalAmount = 0;
-   let volumeCredits = 0;
    let result = `Statement for ${invoice.customer}\n`;
 
    function usd(number: number) {
@@ -55,18 +54,28 @@ export default function statement(invoice: Invoice, plays: Plays) {
       return result;
    }
 
+   function totalVolumeCredits() {
+      let volumeCredits = 0;
+
+      for (let perf of invoice.performances) {
+         volumeCredits += volumeCreditsFor(perf);
+      }
+
+      return volumeCredits;
+   }
+
    function volumeCreditsFor(perf: Performance) {
       let result = 0;
       result += Math.max(perf.audience - 30, 0);
 
-      if ("comedy" === playFor(perf).type) volumeCredits += Math.floor(perf.audience / 5);
+      if ("comedy" === playFor(perf).type) result += Math.floor(perf.audience / 5);
 
       return result;
    }
 
-   for (let perf of invoice.performances) {
-      volumeCredits += volumeCreditsFor(perf);
+   let volumeCredits = totalVolumeCredits();
 
+   for (let perf of invoice.performances) {
       // soma um crédito extra para cada dez espectadores de comédia
       if ("comedy" === playFor(perf).type) volumeCredits += Math.floor(perf.audience / 5);
 
@@ -75,7 +84,11 @@ export default function statement(invoice: Invoice, plays: Plays) {
       totalAmount += amountFor(perf);
    }
 
+   for (let perf of invoice.performances) {
+      volumeCredits += volumeCreditsFor(perf);
+   }
+
    result += `Amount owed is ${usd(totalAmount / 100)}\n`;
-   result += `You earned ${volumeCredits} credits\n`;
+   result += `You earned ${totalVolumeCredits()} credits\n`;
    return result;
 }
