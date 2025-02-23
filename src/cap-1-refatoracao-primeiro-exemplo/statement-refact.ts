@@ -15,15 +15,23 @@ interface Invoice {
 
 export type Plays = { [key: string]: Play };
 
+type RenderData = { [key: string]: string | Performance[] };
+
 export default function statement(invoice: Invoice, plays: Plays) {
-   return renderPlainText(invoice, plays);
+   const statementData: RenderData = {};
+   statementData.customer = invoice.customer;
+   statementData.performances = invoice.performances;
+
+   return renderPlainText(statementData, plays);
 }
 
-function renderPlainText(invoice: Invoice, plays: Plays) {
-   let result = `Statement for ${invoice.customer}\n`;
+function renderPlainText(data: RenderData, plays: Plays) {
+   let result = `Statement for ${data.customer}\n`;
 
-   for (let perf of invoice.performances) {
-      result += ` ${playFor(perf).name}: ${usd(amountFor(perf) / 100)} (${perf.audience} seats)\n`;
+   for (let perf of data.performances) {
+      result += ` ${playFor(perf as Performance).name}: ${usd(amountFor(perf as Performance) / 100)} (${
+         (perf as Performance).audience
+      } seats)\n`;
    }
 
    result += `Amount owed is ${usd(totalAmount() / 100)}\n`;
@@ -33,8 +41,8 @@ function renderPlainText(invoice: Invoice, plays: Plays) {
    function totalAmount() {
       let result = 0;
 
-      for (let perf of invoice.performances) {
-         result += amountFor(perf);
+      for (let perf of data.performances) {
+         result += amountFor(perf as Performance);
       }
 
       return result;
@@ -43,8 +51,8 @@ function renderPlainText(invoice: Invoice, plays: Plays) {
    function totalVolumeCredits() {
       let result = 0;
 
-      for (let perf of invoice.performances) {
-         result += volumeCreditsFor(perf);
+      for (let perf of data.performances) {
+         result += volumeCreditsFor(perf as Performance);
       }
 
       return result;
