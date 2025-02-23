@@ -16,13 +16,49 @@ interface Invoice {
 export type Plays = { [key: string]: Play };
 
 export default function statement(invoice: Invoice, plays: Plays) {
-   let totalAmount = 0;
    let result = `Statement for ${invoice.customer}\n`;
+
+   for (let perf of invoice.performances) {
+      result += ` ${playFor(perf).name}: ${usd(amountFor(perf) / 100)} (${perf.audience} seats)\n`;
+   }
+
+   result += `Amount owed is ${usd(totalAmount() / 100)}\n`;
+   result += `You earned ${totalVolumeCredits()} credits\n`;
+   return result;
+
+   function totalAmount() {
+      let result = 0;
+
+      for (let perf of invoice.performances) {
+         result += amountFor(perf);
+      }
+
+      return result;
+   }
+
+   function totalVolumeCredits() {
+      let result = 0;
+
+      for (let perf of invoice.performances) {
+         result += volumeCreditsFor(perf);
+      }
+
+      return result;
+   }
 
    function usd(number: number) {
       return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2 }).format(
          number
       );
+   }
+
+   function volumeCreditsFor(perf: Performance) {
+      let result = 0;
+      result += Math.max(perf.audience - 30, 0);
+
+      if ("comedy" === playFor(perf).type) result += Math.floor(perf.audience / 5);
+
+      return result;
    }
 
    function playFor(performance: Performance) {
@@ -53,42 +89,4 @@ export default function statement(invoice: Invoice, plays: Plays) {
 
       return result;
    }
-
-   function totalVolumeCredits() {
-      let volumeCredits = 0;
-
-      for (let perf of invoice.performances) {
-         volumeCredits += volumeCreditsFor(perf);
-      }
-
-      return volumeCredits;
-   }
-
-   function volumeCreditsFor(perf: Performance) {
-      let result = 0;
-      result += Math.max(perf.audience - 30, 0);
-
-      if ("comedy" === playFor(perf).type) result += Math.floor(perf.audience / 5);
-
-      return result;
-   }
-
-   let volumeCredits = totalVolumeCredits();
-
-   for (let perf of invoice.performances) {
-      // soma um crédito extra para cada dez espectadores de comédia
-      if ("comedy" === playFor(perf).type) volumeCredits += Math.floor(perf.audience / 5);
-
-      // exibe a linha para esta requisição
-      result += ` ${playFor(perf).name}: ${usd(amountFor(perf) / 100)} (${perf.audience} seats)\n`;
-      totalAmount += amountFor(perf);
-   }
-
-   for (let perf of invoice.performances) {
-      volumeCredits += volumeCreditsFor(perf);
-   }
-
-   result += `Amount owed is ${usd(totalAmount / 100)}\n`;
-   result += `You earned ${totalVolumeCredits()} credits\n`;
-   return result;
 }
