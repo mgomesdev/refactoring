@@ -1,42 +1,18 @@
-interface Performance {
-   playID: string;
-   audience: number;
-   play?: Play;
-   amount?: number;
-   volumeCredits?: number;
-   totalAmount?: number;
-   totalVolumeCredits?: number;
-}
+import { Invoice, Performance, Plays, RenderData } from "./statement";
 
-interface Play {
-   name: string;
-   type: "tragedy" | "comedy";
-}
-
-interface Invoice {
-   customer: string;
-   performances: Performance[];
-}
-
-export type Plays = { [key: string]: Play };
-
-type RenderData = { [key: string]: string | Performance[] };
-
-export default function statement(invoice: Invoice, plays: Plays) {
+export function createStatementData(invoice: Invoice, plays: Plays) {
    const statementData: RenderData = {};
    statementData.customer = invoice.customer;
    statementData.performances = invoice.performances.map(enrichPerformance);
    statementData.totalAmount = String(totalAmount(statementData));
    statementData.totalVolumeCredits = String(totalVolumeCredits(statementData));
-
-   return renderPlainText(statementData, plays);
+   return statementData;
 
    function enrichPerformance(performance: Performance) {
       const result: Performance = Object.assign({}, performance);
       result.play = playFor(result);
       result.amount = amountFor(result);
       result.volumeCredits = volumeCreditsFor(result);
-
       return result;
    }
 
@@ -79,42 +55,10 @@ export default function statement(invoice: Invoice, plays: Plays) {
    }
 
    function totalAmount(data: RenderData) {
-      let result = 0;
-
-      for (let perf of data.performances) {
-         result += Number((perf as Performance).amount);
-      }
-
-      return result;
+      return (data.performances as Performance[]).reduce((total, p) => total + Number(p.amount), 0);
    }
 
    function totalVolumeCredits(data: RenderData) {
-      let result = 0;
-
-      for (let perf of data.performances) {
-         result += Number((perf as Performance).volumeCredits);
-      }
-
-      return result;
-   }
-}
-
-function renderPlainText(data: RenderData, plays: Plays) {
-   let result = `Statement for ${data.customer}\n`;
-
-   for (let perf of data.performances) {
-      result += ` ${(perf as Performance).play?.name}: ${usd(Number((perf as Performance).amount) / 100)} (${
-         (perf as Performance).audience
-      } seats)\n`;
-   }
-
-   result += `Amount owed is ${usd(Number(data.totalAmount))}\n`;
-   result += `You earned ${data.totalVolumeCredits} credits\n`;
-   return result;
-
-   function usd(number: number) {
-      return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2 }).format(
-         number
-      );
+      return (data.performances as Performance[]).reduce((total, p) => total + Number(p.volumeCredits), 0);
    }
 }
