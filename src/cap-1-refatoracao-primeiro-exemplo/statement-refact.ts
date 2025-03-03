@@ -4,6 +4,8 @@ interface Performance {
    play?: Play;
    amount?: number;
    volumeCredits?: number;
+   totalAmount?: number;
+   totalVolumeCredits?: number;
 }
 
 interface Play {
@@ -24,6 +26,8 @@ export default function statement(invoice: Invoice, plays: Plays) {
    const statementData: RenderData = {};
    statementData.customer = invoice.customer;
    statementData.performances = invoice.performances.map(enrichPerformance);
+   statementData.totalAmount = String(totalAmount(statementData));
+   statementData.totalVolumeCredits = String(totalVolumeCredits(statementData));
 
    return renderPlainText(statementData, plays);
 
@@ -32,6 +36,7 @@ export default function statement(invoice: Invoice, plays: Plays) {
       result.play = playFor(result);
       result.amount = amountFor(result);
       result.volumeCredits = volumeCreditsFor(result);
+
       return result;
    }
 
@@ -72,6 +77,26 @@ export default function statement(invoice: Invoice, plays: Plays) {
 
       return result;
    }
+
+   function totalAmount(data: RenderData) {
+      let result = 0;
+
+      for (let perf of data.performances) {
+         result += Number((perf as Performance).amount);
+      }
+
+      return result;
+   }
+
+   function totalVolumeCredits(data: RenderData) {
+      let result = 0;
+
+      for (let perf of data.performances) {
+         result += Number((perf as Performance).volumeCredits);
+      }
+
+      return result;
+   }
 }
 
 function renderPlainText(data: RenderData, plays: Plays) {
@@ -83,29 +108,9 @@ function renderPlainText(data: RenderData, plays: Plays) {
       } seats)\n`;
    }
 
-   result += `Amount owed is ${usd(totalAmount() / 100)}\n`;
-   result += `You earned ${totalVolumeCredits()} credits\n`;
+   result += `Amount owed is ${usd(Number(data.totalAmount))}\n`;
+   result += `You earned ${data.totalVolumeCredits} credits\n`;
    return result;
-
-   function totalAmount() {
-      let result = 0;
-
-      for (let perf of data.performances) {
-         result += Number((perf as Performance).amount);
-      }
-
-      return result;
-   }
-
-   function totalVolumeCredits() {
-      let result = 0;
-
-      for (let perf of data.performances) {
-         result += Number((perf as Performance).volumeCredits);
-      }
-
-      return result;
-   }
 
    function usd(number: number) {
       return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2 }).format(
