@@ -42,7 +42,7 @@ function renderPlainText(data: RenderData) {
    return result;
 }
 
-function htmlStatement(invoice: Invoice, plays: Plays) {
+export function htmlStatement(invoice: Invoice, plays: Plays) {
    return renderHtml(createStatementData(invoice, plays));
 }
 
