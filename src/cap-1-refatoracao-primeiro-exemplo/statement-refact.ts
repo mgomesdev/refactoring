@@ -1,6 +1,9 @@
 interface Performance {
    playID: string;
    audience: number;
+   play?: Play;
+   amount?: number;
+   volumeCredits?: number;
 }
 
 interface Play {
@@ -20,56 +23,15 @@ type RenderData = { [key: string]: string | Performance[] };
 export default function statement(invoice: Invoice, plays: Plays) {
    const statementData: RenderData = {};
    statementData.customer = invoice.customer;
-   statementData.performances = invoice.performances;
+   statementData.performances = invoice.performances.map(enrichPerformance);
 
    return renderPlainText(statementData, plays);
-}
 
-function renderPlainText(data: RenderData, plays: Plays) {
-   let result = `Statement for ${data.customer}\n`;
-
-   for (let perf of data.performances) {
-      result += ` ${playFor(perf as Performance).name}: ${usd(amountFor(perf as Performance) / 100)} (${
-         (perf as Performance).audience
-      } seats)\n`;
-   }
-
-   result += `Amount owed is ${usd(totalAmount() / 100)}\n`;
-   result += `You earned ${totalVolumeCredits()} credits\n`;
-   return result;
-
-   function totalAmount() {
-      let result = 0;
-
-      for (let perf of data.performances) {
-         result += amountFor(perf as Performance);
-      }
-
-      return result;
-   }
-
-   function totalVolumeCredits() {
-      let result = 0;
-
-      for (let perf of data.performances) {
-         result += volumeCreditsFor(perf as Performance);
-      }
-
-      return result;
-   }
-
-   function usd(number: number) {
-      return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2 }).format(
-         number
-      );
-   }
-
-   function volumeCreditsFor(perf: Performance) {
-      let result = 0;
-      result += Math.max(perf.audience - 30, 0);
-
-      if ("comedy" === playFor(perf).type) result += Math.floor(perf.audience / 5);
-
+   function enrichPerformance(performance: Performance) {
+      const result: Performance = Object.assign({}, performance);
+      result.play = playFor(result);
+      result.amount = amountFor(result);
+      result.volumeCredits = volumeCreditsFor(result);
       return result;
    }
 
@@ -80,7 +42,7 @@ function renderPlainText(data: RenderData, plays: Plays) {
    function amountFor(performance: Performance) {
       let result = 0;
 
-      switch (playFor(performance).type) {
+      switch (performance.play?.type) {
          case "tragedy":
             result = 40000;
             if (performance.audience > 30) {
@@ -96,9 +58,58 @@ function renderPlainText(data: RenderData, plays: Plays) {
             break;
 
          default:
-            throw new Error(`unknown type: ${playFor(performance).type}`);
+            throw new Error(`unknown type: ${performance.play?.type}`);
       }
 
       return result;
+   }
+
+   function volumeCreditsFor(perf: Performance) {
+      let result = 0;
+      result += Math.max(perf.audience - 30, 0);
+
+      if ("comedy" === perf.play?.type) result += Math.floor(perf.audience / 5);
+
+      return result;
+   }
+}
+
+function renderPlainText(data: RenderData, plays: Plays) {
+   let result = `Statement for ${data.customer}\n`;
+
+   for (let perf of data.performances) {
+      result += ` ${(perf as Performance).play?.name}: ${usd(Number((perf as Performance).amount) / 100)} (${
+         (perf as Performance).audience
+      } seats)\n`;
+   }
+
+   result += `Amount owed is ${usd(totalAmount() / 100)}\n`;
+   result += `You earned ${totalVolumeCredits()} credits\n`;
+   return result;
+
+   function totalAmount() {
+      let result = 0;
+
+      for (let perf of data.performances) {
+         result += Number((perf as Performance).amount);
+      }
+
+      return result;
+   }
+
+   function totalVolumeCredits() {
+      let result = 0;
+
+      for (let perf of data.performances) {
+         result += Number((perf as Performance).volumeCredits);
+      }
+
+      return result;
+   }
+
+   function usd(number: number) {
+      return new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2 }).format(
+         number
+      );
    }
 }
