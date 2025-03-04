@@ -19,10 +19,4 @@ describe("Cap. 1 - Refatoração - Primeiro Exemplo", () => {
          `<h1>Statement for BigCo</h1> <table> <tr><th>play</th><th>seats</th><th>cost</th></tr> <tr><td>Hamlet</td><td>55</td> <td>$65,000.00</td></tr> <tr><td>As You Like It</td><td>35</td> <td>$49,000.00</td></tr> <tr><td>Othello</td><td>40</td> <td>$50,000.00</td></tr> <table> <p>Amount owed is <em>$47.00</em> credits</p>`
       );
    });
-
-   it.todo("Deixando a calculadora de apresentação polimorfica");
-
-   it.todo("Status: criando os dados com a calculadora polimorfica");
-
-   it.todo("Considerações finais");
 });
