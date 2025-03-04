@@ -1,4 +1,4 @@
-import { Invoice, Performance, Plays, RenderData } from "./statement";
+import { Invoice, Performance, Play, Plays, RenderData } from "./statement";
 
 export function createStatementData(invoice: Invoice, plays: Plays) {
    const statementData: RenderData = {};
@@ -9,8 +9,9 @@ export function createStatementData(invoice: Invoice, plays: Plays) {
    return statementData;
 
    function enrichPerformance(performance: Performance) {
+      const calculator = new PerformanceCalculator(performance, playFor(performance));
       const result: Performance = Object.assign({}, performance);
-      result.play = playFor(result);
+      result.play = calculator.play;
       result.amount = amountFor(result);
       result.volumeCredits = volumeCreditsFor(result);
       return result;
@@ -60,5 +61,15 @@ export function createStatementData(invoice: Invoice, plays: Plays) {
 
    function totalVolumeCredits(data: RenderData) {
       return (data.performances as Performance[]).reduce((total, p) => total + Number(p.volumeCredits), 0);
+   }
+}
+
+class PerformanceCalculator {
+   private performance: Performance;
+   public play: Play;
+
+   constructor(performance: Performance, play: Play) {
+      this.performance = performance;
+      this.play = play;
    }
 }

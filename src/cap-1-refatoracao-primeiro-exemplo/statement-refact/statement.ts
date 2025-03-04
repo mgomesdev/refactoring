@@ -10,7 +10,7 @@ export interface Performance {
    totalVolumeCredits?: number;
 }
 
-interface Play {
+export interface Play {
    name: string;
    type: "tragedy" | "comedy";
 }
