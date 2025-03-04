@@ -20,8 +20,6 @@ describe("Cap. 1 - Refatoração - Primeiro Exemplo", () => {
       );
    });
 
-   it.todo("Passando funções para a calculadora");
-
    it.todo("Deixando a calculadora de apresentação polimorfica");
 
    it.todo("Status: criando os dados com a calculadora polimorfica");
