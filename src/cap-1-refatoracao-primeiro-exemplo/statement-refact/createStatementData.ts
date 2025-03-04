@@ -95,3 +95,63 @@ class ComedyCalculator extends PerformanceCalculator {
       return super.volumeCredits + Math.floor(this.performance.audience / 5);
    }
 }
+
+/* NOTE:
+ * para fins de estudo, esta seria mais ou menos a representação do mesmo exemplo sem a utilização de classes.
+ * o objetivo foi pensando em projetos react.js que por convenção não costuma utilizar classes.
+ * é um esboço, nao está funcionando, precisará corrigir os tipos e fazer o teste passar.
+ */
+
+type CalculatorReturn = {
+   performance: Performance;
+   play: Play;
+   amount: () => unknown;
+   volumeCredits: () => number;
+};
+
+interface PerformanceCalculatorSchema {
+   default: (performance: Performance, play: Play) => CalculatorReturn;
+   tragedyCalculator: (performance: Performance, play: Play) => CalculatorReturn;
+   comedyCalculator: (performance: Performance, play: Play) => CalculatorReturn;
+}
+
+const performanceCalculator: PerformanceCalculatorSchema = {
+   default: (performance, play) => ({
+      performance,
+      play,
+      amount: () => {
+         throw new Error("subclass responsability");
+      },
+      volumeCredits: () => Math.max(performance.audience - 30, 0),
+   }),
+   tragedyCalculator: (performance, play) => ({
+      performance,
+      play,
+      amount: (): number => {
+         let result = 40000;
+
+         if (performance.audience > 30) {
+            result += 1000 * (performance.audience - 30);
+         }
+
+         return result;
+      },
+      volumeCredits: () => performanceCalculator.default(performance, play).volumeCredits(),
+   }),
+   comedyCalculator: (performance, play) => ({
+      performance,
+      play,
+      amount: () => {
+         let result = 30000;
+
+         if (performance.audience > 20) {
+            result += 1000 + 500 * (performance.audience - 20);
+         }
+         result += 300 * performance.audience;
+
+         return result;
+      },
+      volumeCredits: () =>
+         performanceCalculator.default(performance, play).volumeCredits() + Math.floor(performance.audience / 5),
+   }),
+};
