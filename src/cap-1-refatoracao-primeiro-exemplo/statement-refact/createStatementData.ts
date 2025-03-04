@@ -12,7 +12,7 @@ export function createStatementData(invoice: Invoice, plays: Plays) {
       const calculator = new PerformanceCalculator(performance, playFor(performance));
       const result: Performance = Object.assign({}, performance);
       result.play = calculator.play;
-      result.amount = amountFor(result);
+      result.amount = calculator.amount;
       result.volumeCredits = volumeCreditsFor(result);
       return result;
    }
@@ -22,28 +22,7 @@ export function createStatementData(invoice: Invoice, plays: Plays) {
    }
 
    function amountFor(performance: Performance) {
-      let result = 0;
-
-      switch (performance.play?.type) {
-         case "tragedy":
-            result = 40000;
-            if (performance.audience > 30) {
-               result += 1000 * (performance.audience - 30);
-            }
-            break;
-         case "comedy":
-            result = 30000;
-            if (performance.audience > 20) {
-               result += 1000 + 500 * (performance.audience - 20);
-            }
-            result += 300 * performance.audience;
-            break;
-
-         default:
-            throw new Error(`unknown type: ${performance.play?.type}`);
-      }
-
-      return result;
+      return new PerformanceCalculator(performance, playFor(performance)).amount;
    }
 
    function volumeCreditsFor(perf: Performance) {
@@ -71,5 +50,30 @@ class PerformanceCalculator {
    constructor(performance: Performance, play: Play) {
       this.performance = performance;
       this.play = play;
+   }
+
+   get amount() {
+      let result = 0;
+
+      switch (this.play.type) {
+         case "tragedy":
+            result = 40000;
+            if (this.performance.audience > 30) {
+               result += 1000 * (this.performance.audience - 30);
+            }
+            break;
+         case "comedy":
+            result = 30000;
+            if (this.performance.audience > 20) {
+               result += 1000 + 500 * (this.performance.audience - 20);
+            }
+            result += 300 * this.performance.audience;
+            break;
+
+         default:
+            throw new Error(`unknown type: ${this.play.type}`);
+      }
+
+      return result;
    }
 }

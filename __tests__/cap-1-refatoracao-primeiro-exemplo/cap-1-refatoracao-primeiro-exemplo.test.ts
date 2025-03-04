@@ -20,12 +20,6 @@ describe("Cap. 1 - Refatoração - Primeiro Exemplo", () => {
       );
    });
 
-   it.todo("Status: separando em dois arquivos (e fases)");
-
-   it.todo("Reorganizando os calculos por tipo");
-
-   it.todo("Criando uma calculadora de apresentação");
-
    it.todo("Passando funções para a calculadora");
 
    it.todo("Deixando a calculadora de apresentação polimorfica");
