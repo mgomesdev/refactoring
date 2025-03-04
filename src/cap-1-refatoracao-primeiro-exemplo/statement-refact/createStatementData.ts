@@ -9,11 +9,11 @@ export function createStatementData(invoice: Invoice, plays: Plays) {
    return statementData;
 
    function enrichPerformance(performance: Performance) {
-      const calculator = new PerformanceCalculator(performance, playFor(performance));
+      const calculator = createPerformanceCalculator(performance, playFor(performance));
       const result: Performance = Object.assign({}, performance);
       result.play = calculator.play;
       result.amount = calculator.amount;
-      result.volumeCredits = volumeCreditsFor(result);
+      result.volumeCredits = calculator.volumeCredits;
       return result;
    }
 
@@ -44,7 +44,7 @@ export function createStatementData(invoice: Invoice, plays: Plays) {
 }
 
 class PerformanceCalculator {
-   private performance: Performance;
+   protected performance: Performance;
    public play: Play;
 
    constructor(performance: Performance, play: Play) {
@@ -52,29 +52,8 @@ class PerformanceCalculator {
       this.play = play;
    }
 
-   get amount() {
-      let result = 0;
-
-      switch (this.play.type) {
-         case "tragedy":
-            result = 40000;
-            if (this.performance.audience > 30) {
-               result += 1000 * (this.performance.audience - 30);
-            }
-            break;
-         case "comedy":
-            result = 30000;
-            if (this.performance.audience > 20) {
-               result += 1000 + 500 * (this.performance.audience - 20);
-            }
-            result += 300 * this.performance.audience;
-            break;
-
-         default:
-            throw new Error(`unknown type: ${this.play.type}`);
-      }
-
-      return result;
+   get amount(): unknown {
+      throw new Error("subclass responsability");
    }
 
    get volumeCredits() {
@@ -82,6 +61,48 @@ class PerformanceCalculator {
       result += Math.max(this.performance.audience - 30, 0);
 
       if ("comedy" === this.play.type) result += Math.floor(this.performance.audience / 5);
+
+      return result;
+   }
+}
+
+function createPerformanceCalculator(performance: Performance, play: Play) {
+   switch (play.type) {
+      case "tragedy":
+         return new TragedyCalculator(performance, play);
+      case "comedy":
+         return new ComedyCalculator(performance, play);
+      default:
+         throw new Error(`unknown type: ${play.type}`);
+   }
+}
+
+class TragedyCalculator extends PerformanceCalculator {
+   constructor(performance: Performance, play: Play) {
+      super(performance, play);
+   }
+
+   get amount() {
+      let result = 40000;
+      if (this.performance.audience > 30) {
+         result += 1000 * (this.performance.audience - 30);
+      }
+
+      return result;
+   }
+}
+
+class ComedyCalculator extends PerformanceCalculator {
+   constructor(performance: Performance, play: Play) {
+      super(performance, play);
+   }
+
+   get amount() {
+      let result = 30000;
+      if (this.performance.audience > 20) {
+         result += 1000 + 500 * (this.performance.audience - 20);
+      }
+      result += 300 * this.performance.audience;
 
       return result;
    }
