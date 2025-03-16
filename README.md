@@ -13,9 +13,12 @@
 
 -  [Cap. 1 - Refatoração: primeiro exemplo](https://github.com/mgomesdev/refactoring/tree/main/src/cap-1-refatoracao-primeiro-exemplo)
 
-### Pendente
+### Andamento
 
 -  Cap. 2 - Princípios da refatoração
+
+### Pendente
+
 -  Cap. 3 - "Maus cheiros" no código
 -  Cap. 4 - Escrevendo testes
 -  Cap. 5 - Apresentação do catálogo
