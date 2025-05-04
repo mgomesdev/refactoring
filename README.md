@@ -2,25 +2,24 @@
 
 <img src="/readme/refactoring.jpg" alt="Refactoring: Aperfeiçoando o Design de Códigos Existentes - Martin Fowler" title="Refactoring: Aperfeiçoando o Design de Códigos Existentes - Martin Fowler" width="320">
 
-| Título           | Descrição                          |
-| ---------------- | ---------------------------------- |
-| Status           | Andamento                          |
-| Progresso        | 13%                                |
-| Páginas          | 55/435                             |
-| Próximo Capítulo | Cap. 2 - Princípios da refatoração |
+| Título           | Descrição                         |
+| ---------------- | --------------------------------- |
+| Status           | Andamento                         |
+| Progresso        | 27%                               |
+| Páginas          | 116/435                           |
+| Próximo Capítulo | Cap. 5 - Apresentação do catálogo |
 
 ### Concluído
 
 -  [Cap. 1 - Refatoração: primeiro exemplo](https://github.com/mgomesdev/refactoring/tree/main/src/cap-1-refatoracao-primeiro-exemplo)
+-  [Cap. 3 - "Maus cheiros" no código](#)
 
 ### Andamento
 
--  Cap. 2 - Princípios da refatoração
+-  Cap. 4 - Escrevendo Testes
 
 ### Pendente
 
--  Cap. 3 - "Maus cheiros" no código
--  Cap. 4 - Escrevendo testes
 -  Cap. 5 - Apresentação do catálogo
 -  Cap. 6 - Primeiro conjunto de refatorações
 -  Cap. 7 - Encapsulamento
