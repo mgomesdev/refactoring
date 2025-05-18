@@ -1,5 +1,23 @@
+import Province from "../../src/cap-4-escrevendo-testes/Province";
+
 describe("Aplicação simples que permite um usuario analisar e manipular um plano de produção", () => {
-   it.todo("O plano de produção tem uma demanda e o preço para cada província.");
+   it("O plano de produção tem uma demanda e o preço para cada província.", () => {
+      const province = new Province({
+         producers: [
+            {
+               production: 9,
+               cost: 10,
+               name: "Byzantium",
+            },
+         ],
+         demand: 30,
+         price: 20,
+         name: "Sinope",
+      });
+
+      expect(province.demand).toBe(30);
+      expect(province.price).toBe("20");
+   });
    it.todo(
       "Cada provincia tem produtores, e cada um deles é capaz de produzir determinado número de unidades a um preço específico."
    );
