@@ -5,8 +5,8 @@
 
 ### Funcionamento
 
--  O plano de produção tem uma demanda e o preço para cada província.
--  Cada provincia tem produtores, e cada um deles é capaz de produzir determinado número de unidades a um preço específico.
+-  O plano de produção tem uma demanda e o preço para cada província. - [DONE]
+-  Cada provincia tem produtores, e cada um deles é capaz de produzir determinado número de unidades a um preço específico. - [DONE]
 -  A UI também mostra a receita que cada produtor teria se vendesse toda a sua produção.
 -  A tela mostra o deficit (shotfall) na produção (a demanda menos a produção total) e o lucro (profit) para esseplano.
 -  A UI permite o usuário manipular a demanda e o preço, além da produção e o custo individual para ver o efeito no deficit de produção e nos lucros.
