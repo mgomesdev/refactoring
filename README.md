@@ -6,7 +6,7 @@
 | ---------------- | --------------------------------- |
 | Status           | Andamento                         |
 | Progresso        | 27%                               |
-| Páginas          | 116/435                           |
+| Páginas          | 118/435                           |
 | Próximo Capítulo | Cap. 5 - Apresentação do catálogo |
 
 ### Concluído
