@@ -15,9 +15,6 @@ class Province {
    private _demand;
    private _price;
    private _name;
-   private _demandValue: number = 0;
-   private _demandCost: number = 0;
-   private _satisfiedDemand: number = 0;
 
    constructor(doc: Doc) {
       this._totalProduction = 0;
@@ -68,12 +65,13 @@ class Province {
    }
 
    get profit() {
-      return this._demandValue - this._demandCost;
+      return this.demandValue - this.demandCost;
    }
 
    get demandCost() {
       let remainingDemand = this.demand;
       let result = 0;
+
       this.producers
          .sort((a, b) => {
             const aCost = Number(a.cost);
@@ -90,11 +88,11 @@ class Province {
    }
 
    get demandValue() {
-      return this._satisfiedDemand * Number(this.price);
+      return this.satisfiedDemand * this._price;
    }
 
    get satisfiedDemand() {
-      return this._satisfiedDemand;
+      return Math.min(this.demand, this.totalProduction);
    }
 }
 

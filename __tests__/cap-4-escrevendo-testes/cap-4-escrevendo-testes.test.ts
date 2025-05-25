@@ -2,6 +2,23 @@ import Producer from "../../src/cap-4-escrevendo-testes/Producer";
 import Province from "../../src/cap-4-escrevendo-testes/Province";
 
 describe("Aplicação simples que permite um usuario analisar e manipular um plano de produção", () => {
+   let asia: Province;
+
+   beforeEach(() => {
+      asia = new Province({
+         producers: [
+            {
+               production: 9,
+               cost: 4,
+               name: "Byzantium",
+            },
+         ],
+         demand: 5,
+         price: 50,
+         name: "Sinope",
+      });
+   });
+
    it("O plano de produção tem uma demanda e o preço para cada província.", () => {
       const producers = new Producer(
          new Province({
@@ -45,33 +62,18 @@ describe("Aplicação simples que permite um usuario analisar e manipular um pla
       expect(province.price).toBe("20");
       expect(province.name).toBe("Sinope");
    });
-   it.todo("A UI também mostra a receita que cada produtor teria se vendesse toda a sua produção.");
-   it.todo(
-      "A tela mostra o deficit (shotfall) na produção (a demanda menos a produção total) e o lucro (profit) para esseplano."
-   );
-   it.todo(
-      "A UI permite o usuário manipular a demanda e o preço, além da produção e o custo individual para ver o efeito no deficit de produção e nos lucros."
-   );
-   it.todo("Sempre que um usuario mudar qualquer numero na tela, todos os demais se atualizarão imediatamente.");
-});
 
-// Martin Fawler
-describe("province", () => {
-   it("shortfall", () => {
-      const sampleProvinceData = () => ({
-         producers: [
-            {
-               production: 9,
-               cost: 10,
-               name: "Byzantium",
-            },
-         ],
-         demand: 5,
-         price: 20,
-         name: "Sinope",
-      });
-
-      const asia = new Province(sampleProvinceData());
+   it("A tela mostra o deficit (shotfall) na produção (a demanda menos a produção total) e o lucro (profit) para esseplano.", () => {
       expect(asia.shortfall).toEqual(5);
+   });
+
+   it("A UI permite o usuário manipular a demanda e o preço, além da produção e o custo individual para ver o efeito no deficit de produção e nos lucros.", () => {
+      expect(asia.profit).toEqual(-20);
+   });
+
+   it("A UI permite o usuário manipular a demanda e o preço, além da produção e o custo individual para ver o efeito no deficit de produção e nos lucros e sempre que um usuario mudar qualquer numero na tela, todos os demais se atualizarão imediatamente.", () => {
+      asia.producers[0].production = "20";
+      expect(asia.shortfall).toEqual(-6);
+      expect(asia.profit).toEqual(230);
    });
 });
