@@ -54,3 +54,24 @@ describe("Aplicação simples que permite um usuario analisar e manipular um pla
    );
    it.todo("Sempre que um usuario mudar qualquer numero na tela, todos os demais se atualizarão imediatamente.");
 });
+
+// Martin Fawler
+describe("province", () => {
+   it("shortfall", () => {
+      const sampleProvinceData = () => ({
+         producers: [
+            {
+               production: 9,
+               cost: 10,
+               name: "Byzantium",
+            },
+         ],
+         demand: 5,
+         price: 20,
+         name: "Sinope",
+      });
+
+      const asia = new Province(sampleProvinceData());
+      expect(asia.shortfall).toEqual(5);
+   });
+});
