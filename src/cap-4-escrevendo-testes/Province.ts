@@ -2,8 +2,8 @@ import Producer from "./Producer";
 
 export type Producers = { production: number; name: string; cost: number };
 
-type Doc = {
-   producers: Producers[];
+export type Doc = {
+   producers: Producers[] | [];
    demand: number;
    price: number;
    name: string;

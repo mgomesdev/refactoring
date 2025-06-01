@@ -1,5 +1,5 @@
 import Producer from "../../src/cap-4-escrevendo-testes/Producer";
-import Province from "../../src/cap-4-escrevendo-testes/Province";
+import Province, { Doc, Producers } from "../../src/cap-4-escrevendo-testes/Province";
 
 describe("Aplicação simples que permite um usuario analisar e manipular um plano de produção", () => {
    let asia: Province;
@@ -75,5 +75,34 @@ describe("Aplicação simples que permite um usuario analisar e manipular um pla
       asia.producers[0].production = "20";
       expect(asia.shortfall).toEqual(-6);
       expect(asia.profit).toEqual(230);
+   });
+
+   describe("no producers", () => {
+      let noProducers = {} as Province;
+
+      beforeEach(() => {
+         const data = {
+            name: "No producers",
+            producers: [],
+            demand: 30,
+            price: 20,
+         };
+
+         noProducers = new Province(data);
+      });
+
+      it("shortfall", () => {
+         expect(noProducers.shortfall).toEqual(30);
+      });
+
+      it("profit", () => {
+         expect(noProducers.profit).toEqual(0);
+      });
+
+      it("zero demand", () => {
+         asia.demand = 0;
+         expect(asia.shortfall).toEqual(0);
+         expect(asia.profit).toEqual(0);
+      });
    });
 });
