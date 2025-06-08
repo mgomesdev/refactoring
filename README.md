@@ -5,8 +5,8 @@
 | Título           | Descrição               |
 | ---------------- | ----------------------- |
 | Status           | Andamento               |
-| Progresso        | 31%                     |
-| Páginas          | 134/435                 |
+| Progresso        | 33%                     |
+| Páginas          | 144/435                 |
 | Próximo Capítulo | Cap. 7 - Encapsulamento |
 
 ### Concluído
@@ -15,6 +15,8 @@
 -  [Cap. 3 - "Maus cheiros" no código](#)
 -  [Cap. 4 - Escrevendo Testes](https://github.com/mgomesdev/refactoring/tree/main/src/cap-4-escrevendo-testes)
 -  [Cap. 5 - Apresentação do catálogo](#)
+-  [Cap. 6 - Primeiro conjunto de refatorações](https://github.com/mgomesdev/refactoring/tree/main/src/cap-6-primeiro-conjunto-refatoracoes)
+   -  [Cap. 6.1 - Extract function](https://github.com/mgomesdev/refactoring/tree/main/src/cap-6-primeiro-conjunto-refatoracoes/extract-function)
 
 ### Andamento
 
