@@ -5,8 +5,8 @@
 | Título           | Descrição               |
 | ---------------- | ----------------------- |
 | Status           | Andamento               |
-| Progresso        | 33%                     |
-| Páginas          | 144/435                 |
+| Progresso        | 35%                     |
+| Páginas          | 152/435                 |
 | Próximo Capítulo | Cap. 7 - Encapsulamento |
 
 ### Concluído
@@ -16,7 +16,9 @@
 -  [Cap. 4 - Escrevendo Testes](https://github.com/mgomesdev/refactoring/tree/main/src/cap-4-escrevendo-testes)
 -  [Cap. 5 - Apresentação do catálogo](#)
 -  [Cap. 6 - Primeiro conjunto de refatorações](https://github.com/mgomesdev/refactoring/tree/main/src/cap-6-primeiro-conjunto-refatoracoes)
-   -  [Cap. 6.1 - Extract function](https://github.com/mgomesdev/refactoring/tree/main/src/cap-6-primeiro-conjunto-refatoracoes/extract-function)
+   -  [Cap. 6.1 - Extract function](https://github.com/mgomesdev/refactoring/tree/main/src/cap-6-primeiro-conjunto-refatoracoes)
+   -  [Cap. 6.2 - Inline function](https://github.com/mgomesdev/refactoring/tree/main/src/cap-6-primeiro-conjunto-refatoracoes)
+   -  [Cap. 6.3 - Extract Variable](https://github.com/mgomesdev/refactoring/tree/main/src/cap-6-primeiro-conjunto-refatoracoes)
 
 ### Andamento
 

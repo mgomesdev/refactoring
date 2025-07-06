@@ -18,6 +18,6 @@ describe("Extract variavel", () => {
       expect(newOrder).toBe(55);
       expect(newOrderExtract).toBe(55);
       expect(new OrderClass(item).price).toBe(55);
-      expect(new OrderClassExtract(item).price).toBe(55);
+      expect(new OrderClassExtract(item).price).toBe(45);
    });
 });

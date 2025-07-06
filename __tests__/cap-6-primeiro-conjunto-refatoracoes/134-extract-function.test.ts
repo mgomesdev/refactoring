@@ -2,7 +2,7 @@ import {
    printOwingWithoutVarOutScope,
    printOwingCorrect,
    printOwingWrong,
-} from "../../src/cap-6-primeiro-conjunto-refatoracoes/extract-function";
+} from "../../src/cap-6-primeiro-conjunto-refatoracoes/134-extract-function";
 
 describe("Extract Function", () => {
    it("printOWing", () => {
