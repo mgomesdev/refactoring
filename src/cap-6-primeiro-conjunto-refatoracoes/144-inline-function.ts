@@ -1,6 +1,6 @@
-interface Driver {
+type Driver = {
    numberOfLateDeliveries: number;
-}
+};
 
 export function getRating(driver: Driver) {
    return moreThanFiveLateDeliveries(driver) ? 2 : 1;
