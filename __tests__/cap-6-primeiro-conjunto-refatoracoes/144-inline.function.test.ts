@@ -1,7 +1,4 @@
-import {
-   getRating,
-   getRatingInline,
-} from "../../../src/cap-6-primeiro-conjunto-refatoracoes/144-inline-function/144-inline-function";
+import { getRating, getRatingInline } from "../../src/cap-6-primeiro-conjunto-refatoracoes/144-inline-function";
 
 describe("Internalizar função (Inline function)", () => {
    it("getRating", () => {
