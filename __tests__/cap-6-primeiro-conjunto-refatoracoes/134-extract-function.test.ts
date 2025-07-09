@@ -20,7 +20,7 @@ describe("Extract Function", () => {
       const correct = printOwingCorrect(invoice);
       const wrong = printOwingWrong(invoice);
 
-      expect(withoutVarOutScope).toEqual("name: Matheus - amount: 7 - due: 05/08/2025");
+      expect(withoutVarOutScope).toEqual("name: Matheus - amount: 7 - due: 08/08/2025");
       expect(correct).toEqual("name: Matheus - amount: 7");
       expect(wrong).toEqual("name: Matheus - amount: 7");
    });

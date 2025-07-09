@@ -72,3 +72,11 @@ function calculateOutstanding() {
 function printBanner() {
    return "Customer Owes";
 }
+
+/* XXX:
+ * cada função deve fazer uma e apenas uma tarefa.
+ * caso uma função esteja fazendo mais de uma coisa, separe em funções que fazem apenas aquela coisa.
+ * depois você executa essas funções (que foram separadas) na sequencia correta para fazer o que você precisa fazer.
+ * nomeie com bons nomes as funções de acordo com aquilo que elas fazem.
+ * -> utilize o conceito de função (Main)
+ */

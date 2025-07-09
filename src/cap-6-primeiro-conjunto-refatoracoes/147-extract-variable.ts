@@ -74,3 +74,10 @@ export class OrderClassExtract {
       return Math.min(this.basePrice * 0.1, 100);
    }
 }
+
+/* XXX:
+ * evite retornar diretamente diversos valores que fazem parte do contexto maior apenas naquele metodo.
+ * armazene esses diversos valores em um escopo mais acima, seja em variavel ou metodo, e acesse os valores apartir deles.
+ * dessa maneira esses valores ficam disponiveis tanto para o retorno do metodo desejado, tanto para quem quiser utilizar.
+ * do contrário ele estará apenas disponivel no escopo fechado de onde é utilizado.
+ */
