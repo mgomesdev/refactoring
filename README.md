@@ -5,8 +5,8 @@
 | Título           | Descrição               |
 | ---------------- | ----------------------- |
 | Status           | Andamento               |
-| Progresso        | 35%                     |
-| Páginas          | 152/435                 |
+| Progresso        | 37%                     |
+| Páginas          | 160/435                 |
 | Próximo Capítulo | Cap. 7 - Encapsulamento |
 
 ### Concluído
@@ -19,6 +19,8 @@
    -  [Cap. 6.1 - Extract function](https://github.com/mgomesdev/refactoring/tree/main/src/cap-6-primeiro-conjunto-refatoracoes)
    -  [Cap. 6.2 - Inline function](https://github.com/mgomesdev/refactoring/tree/main/src/cap-6-primeiro-conjunto-refatoracoes)
    -  [Cap. 6.3 - Extract Variable](https://github.com/mgomesdev/refactoring/tree/main/src/cap-6-primeiro-conjunto-refatoracoes)
+   -  [Cap. 6.4 - Inline Variable](https://github.com/mgomesdev/refactoring/tree/main/src/cap-6-primeiro-conjunto-refatoracoes)
+   -  [Cap. 6.5 - Change Function Declaration](https://github.com/mgomesdev/refactoring/tree/main/src/cap-6-primeiro-conjunto-refatoracoes)
 
 ### Andamento
 
