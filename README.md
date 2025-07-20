@@ -5,8 +5,8 @@
 | Título           | Descrição               |
 | ---------------- | ----------------------- |
 | Status           | Andamento               |
-| Progresso        | 39%                     |
-| Páginas          | 168/435                 |
+| Progresso        | 41%                     |
+| Páginas          | 172/435                 |
 | Próximo Capítulo | Cap. 7 - Encapsulamento |
 
 ### Concluído
@@ -23,6 +23,7 @@
    -  [Cap. 6.5 - Change Function Declaration](https://github.com/mgomesdev/refactoring/tree/main/src/cap-6-primeiro-conjunto-refatoracoes)
    -  [Cap. 6.6 - Encapsulate Variable](https://github.com/mgomesdev/refactoring/tree/main/src/cap-6-primeiro-conjunto-refatoracoes)
    -  [Cap. 6.7 - Rename Variable](https://github.com/mgomesdev/refactoring/tree/main/src/cap-6-primeiro-conjunto-refatoracoes)
+   -  [Cap. 6.8 - Introduce Parameter Object](https://github.com/mgomesdev/refactoring/tree/main/src/cap-6-primeiro-conjunto-refatoracoes)
 
 ### Andamento
 
