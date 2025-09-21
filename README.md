@@ -1,5 +1,17 @@
 ## Refactoring: Aperfeiçoando o Design de Códigos Existentes - Martin Fawler
 
+> ℹ️ **Informação Importante:**
+>
+> Inicialmente eu começei estudando e replicando os exemplos do livro, convertendo o código para TypeScript.
+>
+> Porém, conforme fui avançando na leitura, percebi que essa abordagem estava gerando muita redundância, e resolvi mudar a abordagem de leitura para uma forma mais eficaz.
+>
+> Vi que faz mais sentido ler somente aquilo que eu realmente preciso utilizar atualmente no meu trabalho, portando, apartir de hoje `09/07/2025`, possivelmente não terá mais código neste repositório.
+>
+> **A leitura continuou, aprendi, e estou aplicando eles no meu dia a dia.**
+
+---
+
 <img src="/readme/refactoring.jpg" alt="Refactoring: Aperfeiçoando o Design de Códigos Existentes - Martin Fowler" title="Refactoring: Aperfeiçoando o Design de Códigos Existentes - Martin Fowler" width="320">
 
 | Título           | Descrição               |
